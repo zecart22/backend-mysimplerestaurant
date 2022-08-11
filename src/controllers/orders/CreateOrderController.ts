@@ -10,7 +10,7 @@ class CreateOrderController {
       name,
       table,
     });
-    console.log(order);
+
     return res.json(order);
   }
 }
