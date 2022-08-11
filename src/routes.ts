@@ -9,6 +9,7 @@ import { CreateCategorieController } from "./controllers/categories/CreateCatego
 import { ListCategoriesController } from "./controllers/categories/ListCategoriesController";
 import { CreateProductsController } from "./controllers/products/CreateProductsCrontroller";
 import { ListByCategoriesController } from "./controllers/products/ListByCategoriesController";
+import { CreateOrderController } from "./controllers/orders/CreateOrderController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -53,3 +54,7 @@ router.get(
   isAthenticated,
   new ListByCategoriesController().handle
 );
+
+/* --ROUTES ORDERS -- */
+
+router.post("/order", isAthenticated, new CreateOrderController().handle);
