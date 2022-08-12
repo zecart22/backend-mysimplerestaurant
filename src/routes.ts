@@ -15,6 +15,7 @@ import { AddItemController } from "./controllers/orders/AddItemController";
 import { RemoveItemController } from "./controllers/orders/RemoveItemController";
 import { SendOrderController } from "./controllers/orders/SendOrderController";
 import { ListLastOrdersController } from "./controllers/orders/ListLastOrdersController";
+import { OrderDetailsController } from "./controllers/orders/OrderDetailsController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -80,4 +81,10 @@ router.get(
   "/orders/list",
   isAthenticated,
   new ListLastOrdersController().handle
+);
+
+router.get(
+  "/order/detail",
+  isAthenticated,
+  new OrderDetailsController().handle
 );
