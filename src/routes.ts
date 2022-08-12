@@ -11,6 +11,8 @@ import { CreateProductsController } from "./controllers/products/CreateProductsC
 import { ListByCategoriesController } from "./controllers/products/ListByCategoriesController";
 import { CreateOrderController } from "./controllers/orders/CreateOrderController";
 import { RemoveOrderController } from "./controllers/orders/RemoveOrderController";
+import { AddItemController } from "./controllers/orders/AddItemController";
+import { RemoveItemController } from "./controllers/orders/RemoveItemController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -61,3 +63,11 @@ router.get(
 router.post("/order", isAthenticated, new CreateOrderController().handle);
 
 router.delete("/order", isAthenticated, new RemoveOrderController().handle);
+
+router.post("/order/add_item", isAthenticated, new AddItemController().handle);
+
+router.delete(
+  "/order/remove_item",
+  isAthenticated,
+  new RemoveItemController().handle
+);
