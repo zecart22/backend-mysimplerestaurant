@@ -10,7 +10,7 @@ interface CreateProducts {
   protein: string;
 }
 
-class CreateProductService {
+class CreateProductURLService {
   async execute({
     protein,
     price,
@@ -45,4 +45,4 @@ class CreateProductService {
   }
 }
 
-export { CreateProductService };
+export { CreateProductURLService };

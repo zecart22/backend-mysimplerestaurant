@@ -3,8 +3,15 @@ import { CreateProductService } from "../../services/products/CreateProductServi
 
 class CreateProductsController {
   async handle(req: Request, res: Response) {
-    const { category_id, description, hungryLevel, name, price, protein } =
-      req.body;
+    const {
+      category_id,
+      description,
+      hungryLevel,
+      name,
+      price,
+      protein,
+      image,
+    } = req.body;
 
     const createProductService = new CreateProductService();
 

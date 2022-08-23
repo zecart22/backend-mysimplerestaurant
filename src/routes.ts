@@ -8,6 +8,7 @@ import { isAthenticated } from "./middlewares/isAthenticated";
 import { CreateCategorieController } from "./controllers/categories/CreateCategorieController";
 import { ListCategoriesController } from "./controllers/categories/ListCategoriesController";
 import { CreateProductsController } from "./controllers/products/CreateProductsCrontroller";
+import { CreateProductsURLController } from "./controllers/products/CreateProductsURLController";
 import { ListByCategoriesController } from "./controllers/products/ListByCategoriesController";
 import { CreateOrderController } from "./controllers/orders/CreateOrderController";
 import { RemoveOrderController } from "./controllers/orders/RemoveOrderController";
@@ -54,6 +55,12 @@ router.post(
   isAthenticated,
   upload.single("file"),
   new CreateProductsController().handle
+);
+
+router.post(
+  "/product_url",
+  isAthenticated,
+  new CreateProductsURLController().handle
 );
 
 router.get(
