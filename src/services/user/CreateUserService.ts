@@ -41,6 +41,7 @@ class CreateUserService {
         id: true,
         name: true,
         email: true,
+        type: true,
       },
     });
 

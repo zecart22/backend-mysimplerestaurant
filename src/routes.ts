@@ -21,6 +21,7 @@ import { ConcludOrderController } from "./controllers/orders/ConcludOrderControl
 import { RemoveProductController } from "./controllers/products/RemoveProductController";
 import { ListAllProductsController } from "./controllers/products/ListAllProductsController";
 import { EditProductController } from "./controllers/products/EditProductController";
+import { EditCategoryController } from "./controllers/categories/EditCategorieController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -49,7 +50,7 @@ router.get(
   new ListCategoriesController().handle
 );
 
-export { router };
+router.put("/category", isAthenticated, new EditCategoryController().handle);
 
 /* --ROUTES PRODUCTS -- */
 
@@ -115,3 +116,5 @@ router.put(
   isAthenticated,
   new ConcludOrderController().handle
 );
+
+export { router };
