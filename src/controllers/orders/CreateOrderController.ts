@@ -3,12 +3,13 @@ import { CreateOrderService } from "../../services/order/CreateOrderService";
 
 class CreateOrderController {
   async handle(req: Request, res: Response) {
-    const { table, name } = req.body;
+    const { table, name, isDelivery } = req.body;
 
     const createOrderService = new CreateOrderService();
     const order = await createOrderService.execute({
       name,
       table,
+      isDelivery,
     });
 
     return res.json(order);
