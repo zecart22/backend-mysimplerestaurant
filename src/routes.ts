@@ -23,6 +23,7 @@ import { ListAllProductsController } from "./controllers/products/ListAllProduct
 import { EditProductController } from "./controllers/products/EditProductController";
 import { EditCategoryController } from "./controllers/categories/EditCategorieController";
 import { RemoveCategoryController } from "./controllers/categories/RemoveCategoryController";
+import { ListAllDraftOrdersController } from "./controllers/orders/ListAllDraftOrdersController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -116,6 +117,12 @@ router.get(
   "/order/detail",
   isAthenticated,
   new OrderDetailsController().handle
+);
+
+router.get(
+  "/orders/draft",
+  isAthenticated,
+  new ListAllDraftOrdersController().handle
 );
 
 router.put(
