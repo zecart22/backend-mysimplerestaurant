@@ -18,6 +18,8 @@ import { SendOrderController } from "./controllers/orders/SendOrderController";
 import { ListLastOrdersController } from "./controllers/orders/ListLastOrdersController";
 import { OrderDetailsController } from "./controllers/orders/OrderDetailsController";
 import { ConcludOrderController } from "./controllers/orders/ConcludOrderController";
+import { RemoveProductController } from "./controllers/products/RemoveProductController";
+import { ListAllProductsController } from "./controllers/products/ListAllProductsController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -68,6 +70,14 @@ router.get(
   isAthenticated,
   new ListByCategoriesController().handle
 );
+
+router.get(
+  "/product_list",
+  isAthenticated,
+  new ListAllProductsController().handle
+);
+
+router.delete("/product", isAthenticated, new RemoveProductController().handle);
 
 /* --ROUTES ORDERS -- */
 
