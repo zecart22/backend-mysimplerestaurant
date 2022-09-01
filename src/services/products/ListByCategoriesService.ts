@@ -10,6 +10,9 @@ class ListByCategoriesService {
       where: {
         category_id: category_id,
       },
+      orderBy: {
+        created_at: "asc",
+      },
     });
 
     return findByCategoryId;

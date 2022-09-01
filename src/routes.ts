@@ -20,6 +20,7 @@ import { OrderDetailsController } from "./controllers/orders/OrderDetailsControl
 import { ConcludOrderController } from "./controllers/orders/ConcludOrderController";
 import { RemoveProductController } from "./controllers/products/RemoveProductController";
 import { ListAllProductsController } from "./controllers/products/ListAllProductsController";
+import { EditProductController } from "./controllers/products/EditProductController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -78,6 +79,8 @@ router.get(
 );
 
 router.delete("/product", isAthenticated, new RemoveProductController().handle);
+
+router.put("/product", isAthenticated, new EditProductController().handle);
 
 /* --ROUTES ORDERS -- */
 
