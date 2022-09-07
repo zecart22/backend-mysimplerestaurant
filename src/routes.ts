@@ -28,6 +28,7 @@ import { ListAllOrdersController } from "./controllers/orders/ListAllOrdersContr
 import { ListAllDeliveryOrdersController } from "./controllers/orders/ListAllDeliveryOrdersController";
 import { ListProductsBySizeController } from "./controllers/products/ListProductsBySizeCrontoller";
 import { ListProductsByProteinController } from "./controllers/products/ListProductsByProteinController";
+import { ListProductByIdController } from "./controllers/products/ListProductByIdController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -89,6 +90,12 @@ router.get(
   "/product_list",
   isAthenticated,
   new ListAllProductsController().handle
+);
+
+router.get(
+  "/product/id",
+  isAthenticated,
+  new ListProductByIdController().handle
 );
 
 router.get(
