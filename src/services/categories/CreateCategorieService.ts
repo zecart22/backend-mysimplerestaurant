@@ -6,6 +6,16 @@ interface CreateCategorie {
 
 class CreateCategorieService {
   async execute({ name }: CreateCategorie) {
+    const nameUnavailable = await prismaClient.category.findFirst({
+      where: {
+        name: name,
+      },
+    });
+
+    if (nameUnavailable) {
+      throw new Error("This category name is Unavailable");
+    }
+
     if (name === "") {
       throw new Error("Name invalid");
     }

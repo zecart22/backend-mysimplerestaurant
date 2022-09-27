@@ -7,6 +7,16 @@ interface CategoryRequest {
 
 class EditCategorieService {
   async execute({ category_id, name }: CategoryRequest) {
+    const nameUnavailable = await prismaClient.category.findFirst({
+      where: {
+        name: name,
+      },
+    });
+
+    if (nameUnavailable) {
+      throw new Error("This category name is Unavailable");
+    }
+
     if (name === "") {
       throw new Error("Name invalid");
     }

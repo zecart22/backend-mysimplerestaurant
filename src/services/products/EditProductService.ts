@@ -22,6 +22,20 @@ class EditProductService {
     hungryLevel,
     protein,
   }: ProductRequest) {
+    const nameUnavailable = await prismaClient.product.findFirst({
+      where: {
+        name: name,
+      },
+    });
+
+    if (name === "") {
+      throw new Error("Name invalid");
+    }
+
+    if (nameUnavailable) {
+      throw new Error("The name of product is Unavailable");
+    }
+
     const product = prismaClient.product.update({
       where: {
         id: product_id,

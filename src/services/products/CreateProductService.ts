@@ -26,6 +26,10 @@ class CreateProductService {
       },
     });
 
+    if (name === "") {
+      throw new Error("Name invalid");
+    }
+
     if (nameUnavailable) {
       throw new Error("The name of product is Unavailable");
     }
