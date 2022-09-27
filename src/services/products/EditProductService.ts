@@ -9,6 +9,7 @@ interface ProductRequest {
   hungryLevel: string;
   protein: string;
   product_id: string;
+  curName: string;
 }
 
 class EditProductService {
@@ -21,6 +22,7 @@ class EditProductService {
     image,
     hungryLevel,
     protein,
+    curName,
   }: ProductRequest) {
     const nameUnavailable = await prismaClient.product.findFirst({
       where: {
@@ -28,11 +30,13 @@ class EditProductService {
       },
     });
 
+    const notChangeName = curName === name;
+
     if (name === "") {
       throw new Error("Name invalid");
     }
 
-    if (nameUnavailable) {
+    if (!notChangeName && nameUnavailable) {
       throw new Error("The name of product is Unavailable");
     }
 

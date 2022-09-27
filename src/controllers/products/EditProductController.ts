@@ -5,6 +5,7 @@ class EditProductController {
   async handle(req: Request, res: Response) {
     const product_id = req.query.product_id as string;
     const {
+      curName,
       name,
       price,
       description,
@@ -15,6 +16,7 @@ class EditProductController {
     } = req.body;
     const editProductController = new EditProductService();
     const product = await editProductController.execute({
+      curName,
       product_id,
       name,
       price,
