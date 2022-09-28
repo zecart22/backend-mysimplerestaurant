@@ -10,6 +10,9 @@ class ListProductsByProteinService {
       where: {
         protein: protein,
       },
+      orderBy: {
+        created_at: "desc",
+      },
     });
 
     return products;

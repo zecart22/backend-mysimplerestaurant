@@ -6,6 +6,16 @@ interface OrderRemoveRequest {
 
 class RemoveOrderService {
   async execute({ order_id }: OrderRemoveRequest) {
+    const isEmpetyOrder = await prismaClient.item.findMany({
+      where: {
+        order_id: order_id,
+      },
+    });
+
+    if (isEmpetyOrder.length > 0) {
+      throw new Error("This order is not empety");
+    }
+
     const order = await prismaClient.order.delete({
       where: {
         id: order_id,

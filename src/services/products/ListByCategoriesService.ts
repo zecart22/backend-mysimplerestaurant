@@ -11,7 +11,7 @@ class ListByCategoriesService {
         category_id: category_id,
       },
       orderBy: {
-        created_at: "asc",
+        created_at: "desc",
       },
     });
 

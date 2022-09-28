@@ -10,6 +10,9 @@ class ListProductsSizeService {
       where: {
         hungryLevel: size,
       },
+      orderBy: {
+        created_at: "desc",
+      },
     });
 
     return products;
