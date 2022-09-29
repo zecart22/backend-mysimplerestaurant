@@ -138,7 +138,7 @@ router.get(
   new ListLastOrdersController().handle
 );
 
-router.get(
+router.post(
   "/orders/table",
   isAthenticated,
   new ListAllOrdersByTableNumberController().handle
