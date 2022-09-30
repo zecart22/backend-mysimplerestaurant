@@ -12,6 +12,17 @@ class ListAllOrdersByTableNumberService {
         draft: false,
         status: false,
       },
+      select: {
+        id: true,
+        table: true,
+        status: true,
+        draft: true,
+        name: true,
+        items: true,
+        isDelivery: true,
+        created_at: true,
+        updated_at: true,
+      },
       orderBy: {
         created_at: "desc",
       },
