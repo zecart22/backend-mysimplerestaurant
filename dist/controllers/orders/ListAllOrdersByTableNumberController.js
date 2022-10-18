@@ -9,16 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DetailUserController = void 0;
-const DetailUserService_1 = require("../../services/user/DetailUserService");
-class DetailUserController {
+exports.ListAllOrdersByTableNumberController = void 0;
+const ListAllOrdersByTableNumberService_1 = require("../../services/order/ListAllOrdersByTableNumberService");
+class ListAllOrdersByTableNumberController {
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user_id = req.query.user_id;
-            const detailUserService = new DetailUserService_1.DetailUserService();
-            const user = yield detailUserService.execute({ user_id });
-            return res.json(user);
+            /* const table = req.query.table as unknown as number; */
+            const { table } = req.body;
+            const listAllOrdersByTableNumberService = new ListAllOrdersByTableNumberService_1.ListAllOrdersByTableNumberService();
+            const tableNumber = yield listAllOrdersByTableNumberService.execute({
+                table,
+            });
+            return res.json(tableNumber);
         });
     }
 }
-exports.DetailUserController = DetailUserController;
+exports.ListAllOrdersByTableNumberController = ListAllOrdersByTableNumberController;

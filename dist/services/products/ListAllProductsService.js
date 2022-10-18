@@ -12,33 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCategorieService = void 0;
+exports.ListAllProductsService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
-class CreateCategorieService {
-    execute({ name }) {
+class ListAllProductsService {
+    execute() {
         return __awaiter(this, void 0, void 0, function* () {
-            const nameUnavailable = yield prisma_1.default.category.findFirst({
-                where: {
-                    name: name,
+            const products = yield prisma_1.default.product.findMany({
+                orderBy: {
+                    created_at: "desc",
                 },
             });
-            if (nameUnavailable) {
-                throw new Error("This category name is Unavailable");
-            }
-            if (name === "") {
-                throw new Error("Name invalid");
-            }
-            const category = yield prisma_1.default.category.create({
-                data: {
-                    name: name,
-                },
-                select: {
-                    name: true,
-                    id: true,
-                },
-            });
-            return category;
+            return products;
         });
     }
 }
-exports.CreateCategorieService = CreateCategorieService;
+exports.ListAllProductsService = ListAllProductsService;

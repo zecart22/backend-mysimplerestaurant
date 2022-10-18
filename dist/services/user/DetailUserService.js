@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DetailUserService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 class DetailUserService {
-    execute(user_id) {
+    execute({ user_id }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield prisma_1.default.user.findFirst({
+            const user = yield prisma_1.default.user.findUnique({
                 where: {
                     id: user_id,
                 },

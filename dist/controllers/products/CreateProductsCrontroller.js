@@ -14,7 +14,7 @@ const CreateProductService_1 = require("../../services/products/CreateProductSer
 class CreateProductsController {
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { category_id, description, hungryLevel, name, price, protein } = req.body;
+            const { category_id, description, hungryLevel, name, price, protein, image, } = req.body;
             const createProductService = new CreateProductService_1.CreateProductService();
             if (!req.file) {
                 throw new Error("error upload file");

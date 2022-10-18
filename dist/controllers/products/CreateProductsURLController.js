@@ -9,16 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DetailUserController = void 0;
-const DetailUserService_1 = require("../../services/user/DetailUserService");
-class DetailUserController {
+exports.CreateProductsURLController = void 0;
+const CreateProductsURLService_1 = require("../../services/products/CreateProductsURLService");
+class CreateProductsURLController {
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user_id = req.query.user_id;
-            const detailUserService = new DetailUserService_1.DetailUserService();
-            const user = yield detailUserService.execute({ user_id });
-            return res.json(user);
+            const { category_id, description, hungryLevel, name, price, protein, image, } = req.body;
+            const createProductService = new CreateProductsURLService_1.CreateProductURLService();
+            if (!image) {
+                throw new Error("error to send image url");
+            }
+            const product = yield createProductService.execute({
+                category_id,
+                description,
+                hungryLevel,
+                image,
+                name,
+                price,
+                protein,
+            });
+            return res.json(product);
         });
     }
 }
-exports.DetailUserController = DetailUserController;
+exports.CreateProductsURLController = CreateProductsURLController;

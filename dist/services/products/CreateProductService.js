@@ -17,6 +17,17 @@ const prisma_1 = __importDefault(require("../../prisma"));
 class CreateProductService {
     execute({ protein, price, name, image, hungryLevel, description, category_id, }) {
         return __awaiter(this, void 0, void 0, function* () {
+            const nameUnavailable = yield prisma_1.default.product.findFirst({
+                where: {
+                    name: name,
+                },
+            });
+            if (name === "") {
+                throw new Error("Name invalid");
+            }
+            if (nameUnavailable) {
+                throw new Error("The name of product is Unavailable");
+            }
             const product = yield prisma_1.default.product.create({
                 data: {
                     description: description,

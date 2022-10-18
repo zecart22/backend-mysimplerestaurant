@@ -21,6 +21,9 @@ class ListByCategoriesService {
                 where: {
                     category_id: category_id,
                 },
+                orderBy: {
+                    created_at: "desc",
+                },
             });
             return findByCategoryId;
         });

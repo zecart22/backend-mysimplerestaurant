@@ -12,43 +12,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateUserService = void 0;
+exports.EditProductService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
-const bcryptjs_1 = require("bcryptjs");
-class CreateUserService {
-    execute({ name, email, password, type, adress }) {
+class EditProductService {
+    execute({ product_id, name, price, description, category_id, image, hungryLevel, protein, curName, }) {
         return __awaiter(this, void 0, void 0, function* () {
-            // verificar se ele enviou um email
-            if (!email) {
-                throw new Error("Email incorrect");
-            }
-            //Verificar se esse email já está cadastrado na plataforma
-            const userAlreadyExists = yield prisma_1.default.user.findFirst({
+            const nameUnavailable = yield prisma_1.default.product.findFirst({
                 where: {
-                    email: email,
+                    name: name,
                 },
             });
-            if (userAlreadyExists) {
-                throw new Error("User already exists");
+            const notChangeName = curName === name;
+            if (name === "") {
+                throw new Error("Name invalid");
             }
-            const passwordHash = yield (0, bcryptjs_1.hash)(password, 8);
-            const user = yield prisma_1.default.user.create({
+            if (!notChangeName && nameUnavailable) {
+                throw new Error("The name of product is Unavailable");
+            }
+            const product = prisma_1.default.product.update({
+                where: {
+                    id: product_id,
+                },
                 data: {
                     name: name,
-                    email: email,
-                    password: passwordHash,
-                    adress: adress,
-                    type: type,
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    type: true,
+                    price: price,
+                    description: description,
+                    category_id: category_id,
+                    image: image,
+                    hungryLevel: hungryLevel,
+                    protein: protein,
                 },
             });
-            return user;
+            return product;
         });
     }
 }
-exports.CreateUserService = CreateUserService;
+exports.EditProductService = EditProductService;

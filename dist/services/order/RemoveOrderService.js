@@ -17,6 +17,14 @@ const prisma_1 = __importDefault(require("../../prisma"));
 class RemoveOrderService {
     execute({ order_id }) {
         return __awaiter(this, void 0, void 0, function* () {
+            const isEmpetyOrder = yield prisma_1.default.item.findMany({
+                where: {
+                    order_id: order_id,
+                },
+            });
+            if (isEmpetyOrder.length > 0) {
+                throw new Error("This order is not empety");
+            }
             const order = yield prisma_1.default.order.delete({
                 where: {
                     id: order_id,
