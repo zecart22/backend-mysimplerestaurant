@@ -32,6 +32,7 @@ import { ListProductByIdController } from "./controllers/products/ListProductByI
 import { ListAllConcluidOrdersController } from "./controllers/orders/ListAllConcluidOrdersController";
 import { ListAllOrdersByTableNumberController } from "./controllers/orders/ListAllOrdersByTableNumberController";
 import { OrderTotalPriceController } from "./controllers/orders/OrderTotalPriceController";
+import { TableTotalPriceController } from "./controllers/orders/TableTotalPriceController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -181,6 +182,12 @@ router.get(
   "/order/total/price",
   isAthenticated,
   new OrderTotalPriceController().handle
+);
+
+router.get(
+  "/table/total/price",
+  isAthenticated,
+  new TableTotalPriceController().handle
 );
 
 export { router };
