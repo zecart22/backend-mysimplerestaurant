@@ -9,6 +9,7 @@ class OrderTotalPriceService {
     const order = await prismaClient.item.findMany({
       where: {
         order_id: order_id,
+        
       },
       include: {
         product: true,

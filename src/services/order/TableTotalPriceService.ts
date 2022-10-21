@@ -12,11 +12,8 @@ class TableTotalPriceService {
         draft: false,
         status: false,
       },
-    });
-
-    const itens = await prismaClient.item.findMany({
       include: {
-        product: true,
+        items: true,
       },
     });
 
@@ -24,22 +21,21 @@ class TableTotalPriceService {
 
     let index = 0;
 
-    let order = "";
+    const ordersId = ordersInTable.map((order) => order.items[0].id);
 
-    const ordersId = ordersInTable.map((order) => order.id);
-
-    while (index < ordersInTable.length) {
-      index++;
+    while (index < ordersId.length) {
       let id = ordersId[index];
+
       const itemData = await prismaClient.item.findMany({
         where: {
-          order_id: id,
+          id: id,
         },
         include: {
           product: true,
         },
       });
       arrayOrders.push(itemData);
+      index++;
     }
 
     const subtotal = arrayOrders[0].map(
