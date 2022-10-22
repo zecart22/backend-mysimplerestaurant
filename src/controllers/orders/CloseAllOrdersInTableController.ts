@@ -3,7 +3,7 @@ import { CloseAllOrdersInTable } from "../../services/order/CloseAllOrdersInTabl
 
 class CloseAllOrdersInTableController {
   async handle(req: Request, res: Response) {
-    const tableNumber = req.query.table as string;
+    const { tableNumber } = req.body;
     const table = Number(tableNumber);
 
     const closeAllOrdersInTable = new CloseAllOrdersInTable();
