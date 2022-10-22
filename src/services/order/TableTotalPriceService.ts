@@ -19,12 +19,17 @@ class TableTotalPriceService {
 
     const arrayOrders = [];
 
+    const itensId = [];
+
+    const takeItensId = ordersInTable.map((order) =>
+      order.items.map((item) => itensId.push(item.id))
+    );
+
     let index = 0;
+    let size = itensId.length;
 
-    const ordersId = ordersInTable.map((order) => order.items[0].id);
-
-    while (index < ordersId.length) {
-      let id = ordersId[index];
+    while (index < size) {
+      let id = itensId[index];
 
       const itemData = await prismaClient.item.findMany({
         where: {
@@ -34,11 +39,13 @@ class TableTotalPriceService {
           product: true,
         },
       });
-      arrayOrders.push(itemData);
+      arrayOrders.push(itemData[0]);
       index++;
     }
 
-    const subtotal = arrayOrders[0].map(
+    const arrayItens = arrayOrders.map((item) => item);
+
+    const subtotal = arrayItens.map(
       (item: { amount: number; product: { price: any } }) =>
         item.amount * Number(item.product.price)
     );

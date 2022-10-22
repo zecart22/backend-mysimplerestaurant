@@ -8,14 +8,14 @@ interface AddItemRequest {
 
 class AddItemService {
   async execute({ order_id, product_id, amount }: AddItemRequest) {
-    const isOrderNoDraft = prismaClient.order.findMany({
+    const isOrderNoDraft = prismaClient.order.findFirst({
       where: {
         id: order_id,
         draft: false,
       },
     });
 
-    if (isOrderNoDraft) {
+    if (!isOrderNoDraft) {
       throw new Error("This order is not draft anymore");
     }
 
