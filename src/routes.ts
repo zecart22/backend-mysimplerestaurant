@@ -33,6 +33,7 @@ import { ListAllConcluidOrdersController } from "./controllers/orders/ListAllCon
 import { ListAllOrdersByTableNumberController } from "./controllers/orders/ListAllOrdersByTableNumberController";
 import { OrderTotalPriceController } from "./controllers/orders/OrderTotalPriceController";
 import { TableTotalPriceController } from "./controllers/orders/TableTotalPriceController";
+import { CloseAllOrdersInTableController } from "./controllers/orders/CloseAllOrdersInTableController";
 import uploadConfig from "./config/multer";
 
 const router = Router();
@@ -133,6 +134,12 @@ router.delete(
 );
 
 router.put("/order/send", isAthenticated, new SendOrderController().handle);
+
+router.put(
+  "/close/table",
+  isAthenticated,
+  new CloseAllOrdersInTableController().handle
+);
 
 router.get(
   "/orders/list",
