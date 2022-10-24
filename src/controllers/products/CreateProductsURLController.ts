@@ -8,10 +8,12 @@ class CreateProductsURLController {
       description,
       hungryLevel,
       name,
-      price,
+      prices,
       protein,
       image,
     } = req.body;
+
+    const price = prices.toString();
 
     const createProductService = new CreateProductURLService();
 
